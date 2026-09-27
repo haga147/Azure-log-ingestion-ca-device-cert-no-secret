@@ -34,11 +34,11 @@ Optional: `TRUSTED_ISSUER_CERTS_BASE64` (fleet-scale caller trust, see below), `
 
 ```powershell
 Connect-AzAccount
-.\admin\Publish-IngestFunction.ps1 -ResourceGroupName "avdrichtestfunctionapp" -FunctionAppName "avdrich-Test-function-app" `
-  -DceIngestUri "https://dce-hfb-logs-udhj.eastus-1.ingest.monitor.azure.com" `
-  -DcrImmutableId "dcr-8301f906cba24dea8fa8fccefa6c33c9" `
-  -StreamName "Custom-EndpointEvents_CL" `
-  -TrustedIssuerCertPaths "C:\Temp\Certs\AVDRICH Intune Issuing CA.cer"
+.\admin\Publish-IngestFunction.ps1 -ResourceGroupName "<fn-rg>" -FunctionAppName "<fn-app-name>" `
+  -DceIngestUri "<dce-uri>" `
+  -DcrImmutableId "<dcr-immutable-id>" `
+  -StreamName "<Custom-HelloForBusiness_CL>" `
+  -TrustedIssuerCertPaths "<C:\Temp\Certs\AVDRICH Intune Issuing CA.cer>"
 ```
 
 Leave out `-DcrResourceId` if the role assignment already exists. Leave out `-TrustedIssuerCertPaths` if you're not enforcing mTLS yet (not recommended for production at fleet scale).
