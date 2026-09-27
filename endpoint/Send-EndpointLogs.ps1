@@ -23,9 +23,16 @@
 #Requires -Version 5.1
 [CmdletBinding()]
 param(
-    [string]$ConfigPath = (Join-Path $PSScriptRoot 'EndpointConfig.psd1'),
+    [string]$ConfigPath,
     [switch]$TestRecord
 )
+
+# Resolved here, not as a param default: under Windows PowerShell 5.1 -File (as the scheduled
+# task launches it) $PSScriptRoot can be empty during parameter binding, which made Join-Path
+# throw before any logging ran.
+if (-not $ConfigPath) {
+    $ConfigPath = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) 'EndpointConfig.psd1'
+}
 
 Set-StrictMode -Version 2.0
 $ErrorActionPreference = 'Stop'
@@ -72,7 +79,7 @@ function Save-State {
     Move-Item -LiteralPath $tmp -Destination $Path -Force
 }
 
-# ---- Record shape: Custom-HelloForBusiness3_CL -------------------------------
+# ---- Record shape: Custom-HelloForBusiness_CL --------------------------------
 function ConvertTo-LogRecord {
     param($WinEvent, [int]$MaxMessageChars)
     $msg = $null

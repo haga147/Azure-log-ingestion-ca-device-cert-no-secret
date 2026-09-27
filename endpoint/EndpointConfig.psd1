@@ -48,7 +48,7 @@
     # Blank = %ProgramData%\LogShipper (log file + bookmark state). Must be a literal path if set.
     StateDir               = ''
 
-    # Collect the log whose events match the Custom-HelloForBusiness3_CL DCR stream schema.
+    # Collect the log whose events match the Custom-HelloForBusiness_CL DCR stream schema.
     Logs = @(
         @{ LogName = 'Microsoft-Windows-HelloForBusiness/Operational' }
     )
